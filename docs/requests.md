@@ -295,6 +295,7 @@ import { RequestQueryBuilder } from '@dataui/crud-request';
 RequestQueryBuilder.setOptions({
   delim: '||',
   delimStr: ',',
+  delimArr: '&',
   paramNamesMap: {
     fields: ['fields', 'select'],
     search: 's',
