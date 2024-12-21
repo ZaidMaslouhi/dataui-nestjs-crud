@@ -67,10 +67,6 @@ export class RequestQueryParser implements ParsedRequestParams {
   private _paramNames: string[];
   private _paramsOptions: ParamsOptions;
 
-  private _joinConditionParseOptions: IParseOptions = {
-    delimiter: this._options.delimStr,
-  };
-
   private get _options(): RequestQueryBuilderOptions {
     return RequestQueryBuilder.getOptions();
   }
