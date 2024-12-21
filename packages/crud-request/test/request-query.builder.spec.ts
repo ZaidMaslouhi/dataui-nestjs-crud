@@ -36,6 +36,12 @@ describe('#request-query', () => {
         const _options = (RequestQueryBuilder as any)._options;
         expect(_options.delim).toBe(override);
       });
+      it('should merge options, 3', () => {
+        const override = '#';
+        RequestQueryBuilder.setOptions({ delimArr: override });
+        const _options = (RequestQueryBuilder as any)._options;
+        expect(_options.delimArr).toBe(override);
+      });
     });
 
     describe('#select', () => {

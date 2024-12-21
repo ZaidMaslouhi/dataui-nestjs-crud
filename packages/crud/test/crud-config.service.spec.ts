@@ -26,13 +26,14 @@ describe('#crud', () => {
       const conf: CrudGlobalConfig = {
         queryParser: {
           delim: '__',
+          delimArr: '§',
         },
       };
       const expected = { ...CrudConfigService.config };
       CrudConfigService.load(conf);
       expect(CrudConfigService.config).toEqual(expect.objectContaining(expected));
       expect(RequestQueryBuilder.getOptions()).toEqual(
-        expect.objectContaining({ ...requestOptions, delim: '__' }),
+        expect.objectContaining({ ...requestOptions, delim: '__', delimArr: '§' }),
       );
     });
     it('should set query, routes, params', () => {

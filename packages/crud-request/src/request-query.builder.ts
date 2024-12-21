@@ -40,6 +40,7 @@ export class RequestQueryBuilder {
   private static _options: RequestQueryBuilderOptions = {
     delim: '||',
     delimStr: ',',
+    delimArr: '&',
     paramNamesMap: {
       fields: ['fields', 'select'],
       search: 's',
@@ -58,11 +59,6 @@ export class RequestQueryBuilder {
   private paramNames: {
     [key in keyof RequestQueryBuilderOptions['paramNamesMap']]: string;
   } = {};
-  private joinConditionString: IStringifyOptions = {
-    encode: false,
-    delimiter: '&',
-    arrayFormat: 'indices',
-  };
   public queryObject: { [key: string]: any } = {};
   public queryString: string;
 
@@ -213,7 +209,12 @@ export class RequestQueryBuilder {
   }
 
   private addJoin(join: QueryJoin | QueryJoinArr): string {
-    const { delim, delimStr } = this.options;
+    const { delim, delimStr, delimArr } = this.options;
+    const conditionStringifyOptions: IStringifyOptions = {
+      encode: false,
+      delimiter: delimArr,
+      arrayFormat: 'indices',
+    };
 
     const normalizedJoin = Array.isArray(join)
       ? { field: join[0], select: join[1], on: join[2] }
@@ -230,7 +231,7 @@ export class RequestQueryBuilder {
       ? delim + normalizedJoin.select.join(delimStr)
       : '';
     const conditionsPart = conditions
-      ? delim + stringify(conditions, this.joinConditionString)
+      ? delim + stringify(conditions, conditionStringifyOptions)
       : '';
 
     return fieldPart + selectPart + conditionsPart;

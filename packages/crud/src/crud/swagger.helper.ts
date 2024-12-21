@@ -289,6 +289,7 @@ export class Swagger {
     const {
       delim: d,
       delimStr: coma,
+      delimArr: amp,
       fields,
       search,
       filter,
@@ -578,6 +579,7 @@ export class Swagger {
     return {
       delim: qbOptions.delim,
       delimStr: qbOptions.delimStr,
+      delimArr: qbOptions.delimArr,
       fields: name('fields'),
       search: name('search'),
       filter: name('filter'),
